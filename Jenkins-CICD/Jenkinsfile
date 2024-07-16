@@ -12,12 +12,14 @@ pipeline{
         }
         stage('checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/TERRAFORM-JENKINS-CICD.git'
+                git branch: 'main', url: 'https://github.com/akaspatranobis/Tetris-Game-Project.git'
             }
         }
         stage('Terraform version'){
              steps{
-                 sh 'terraform --version'
+                 dir('Jenkins-CICD') {
+                    sh 'terraform --version'
+                    }
                 }
         }
         stage("Sonarqube Analysis "){
@@ -47,17 +49,23 @@ pipeline{
         }
         stage('Terraform init'){
             steps{
-                sh 'terraform init'
+                dir('Jenkins-CICD') {
+                    sh 'terraform init'
+                }
             }
         }
         stage('Terraform plan'){
             steps{
-                sh 'terraform plan'
+                dir('Jenkins-CICD') {
+                    sh 'terraform plan'
+                }
             }
         }
         stage('Terraform apply'){
             steps{
-                sh 'terraform ${action} --auto approve'
+                dir('Jenkins-CICD') {
+                    sh 'terraform ${action} --auto approve'
+                }
             }
         }
     }

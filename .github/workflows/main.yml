@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Update kubeconfig
-        run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
+        run: aws eks --region us-east-1 update-kubeconfig --name EKS_CLOUD
 
       - name: Deploy to EKS
-        run: kubectl delete -f deployment-service.yml
+        run: kubectl delete -f k8/deployment.yml
 
